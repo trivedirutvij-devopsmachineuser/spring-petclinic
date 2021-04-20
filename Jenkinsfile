@@ -5,7 +5,9 @@ pipeline {
       steps {
         echo 'Test'
         withSonarQubeEnv(installationName: 'sonarqube-server', credentialsId: 'sonar-token', envOnly: true) {
-          waitForQualityGate(credentialsId: 'sonar-token', abortPipeline: true)
+          sh '''./mvnw clean verify sonar:sonar -Dsonar.login=${sonar-token}
+'''
+          sh 'echo "done"'
         }
 
       }
