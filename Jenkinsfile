@@ -1,14 +1,12 @@
 pipeline {
   agent any
   stages {
-    stage('Test') {
+    stage('Setup') {
       steps {
         echo 'Test'
         withSonarQubeEnv(installationName: 'sonarqube-server', credentialsId: 'sonar-token', envOnly: true) {
-          sh '''echo ${sonar-token}
-# ./mvnw clean install
-# ./mvnw clean verify sonar:sonar -Dsonar.login=${sonar-token}
-'''
+          sh '''./mvnw clean install 
+./mvnw sonar:sonar -Dsonar.login=${sonar-token}'''
           sh 'echo "done"'
         }
 
