@@ -5,9 +5,9 @@ pipeline {
       steps {
         sh 'echo $SONAR_MAVEN_GOAL'
         echo '$SONAR_MAVEN_GOAL'
-        withSonarQubeEnv(installationName: 'sonar-server', credentialsId: 'sonar-token', envOnly: true) {
+        withSonarQubeEnv(installationName: 'sonar-server', credentialsId: 'actual-token', envOnly: true) {
           sh '''mvn clean install
-mvn sonar:sonar -Dsonar.login=${sonar-token}
+mvn sonar:sonar -Dsonar.login=${actual-token}
 '''
           sh 'echo "done"'
         }
