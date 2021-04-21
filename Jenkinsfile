@@ -7,7 +7,7 @@ pipeline {
         echo '$SONAR_MAVEN_GOAL'
         withSonarQubeEnv(installationName: 'sonar-server', credentialsId: 'sonar-token', envOnly: true) {
           sh '''mvn clean install
-mvn sonar:sonar -Dsonar.login=myAuthenticationToken
+mvn sonar:sonar -Dsonar.login=${sonar-token}
 '''
           sh 'echo "done"'
         }
